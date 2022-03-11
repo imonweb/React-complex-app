@@ -1,15 +1,14 @@
 import React, { useEffect, useContext } from "react"
 import { Link } from "react-router-dom"
 import DispatchContext from "../DispatchContext"
+import StateContext from "../StateContext"
 
 function HeaderLoggedIn(props) {
   const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   function handleLogout() {
     appDispatch({ type: "logout" })
-    localStorage.removeItem("complexappToken")
-    localStorage.removeItem("complexappUsername")
-    localStorage.removeItem("complexappAvatar")
   }
 
   return (
@@ -23,8 +22,9 @@ function HeaderLoggedIn(props) {
       </span>
 
       <a href="#" className="mr-2">
-        <img className="small-header-avatar" src="https://www.imonweb.co.uk/avatar1.png" width="34px" />
+        {/* <img className="small-header-avatar" src="https://www.imonweb.co.uk/avatar1.png" width="34px" /> */}
         {/* <img className="small-header-avatar" src={localStorage.getItem("complexappAvatar")} width="32px"/> */}
+        <img className="small-header-avatar" src={appState.avatar} width="34px" />
       </a>
       <Link className="btn btn-sm btn-success mr-2" to="/create-post">
         Create Post
